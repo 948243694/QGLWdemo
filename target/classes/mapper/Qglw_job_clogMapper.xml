@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.Qglw_job_clogDao">
+
+    <insert id="saveLogTA" parameterType="Qglw_job_clogDTO">
+        insert into qglw_job_clog
+        (AAZ496,LOGID0,AAE030,AAE031,LogDate,MSGNO,AAE314,AAA204,AUTOSIGN)
+        values
+        (#{AAZ496},#{LOGID0},#{AAE030},#{AAE031},#{LogDate},#{MSGNO},#{AAE314},#{AAA204},#{AUTOSIGN})
+    </insert>
+
+</mapper>

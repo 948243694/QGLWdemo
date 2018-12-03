@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.Qglw_kc26_zyDao">
+    <resultMap type="com.ylzinfo.app.model.Qglw_kc26_zyDTO" id="Qglw_kc26_zykMap">
+        <id column="AAB299" property="AAB299" javaType="java.lang.String"/>
+        <result column="AAB301" property="AAB301" javaType="java.lang.String"/>
+        <result column="AKC264" property="AKC264" javaType="java.lang.String"/>
+        <result column="AKE149" property="AKE149" javaType="java.lang.String"/>
+        <result column="AKC194" property="AKC194" javaType="java.lang.String"/>
+        <result column="AAA113" property="AAA113" javaType="java.lang.String"/>
+        <result column="AKC190" property="AKC190" javaType="java.lang.String"/>
+        <result column="AAZ216" property="AAZ216" javaType="java.lang.String"/>
+        <result column="AAZ497" property="AAZ497" javaType="java.lang.String"/>
+        <result column="AAZ498" property="AAZ498" javaType="java.lang.String"/>
+        <result column="AKB067" property="AKB067" javaType="java.lang.String"/>
+    </resultMap>
+
+    <select id="getHospChargesTA" resultMap="Qglw_kc26_zykMap">
+        select
+        AAB299,AAB301,AKC264,AKE149,AKC194,AAA113,AKC190,AAZ216,AAZ497,AAZ498,AKB067
+        from
+        vw_QGLW_KC26
+    </select>
+
+    <select id="getOmitHospChargesTA" resultMap="Qglw_kc26_zykMap">
+
+    </select>
+
+</mapper>

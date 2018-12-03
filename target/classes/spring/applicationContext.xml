@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:database/config.properties" />
+    <context:component-scan base-package="com.ylzinfo.app.service,com.ylzinfo.app.dao"/>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.ylzinfo.app.model"/>
+        <property name="mapperLocations" value="classpath*:mapper/*Mapper.xml"/>
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--驱动类名 -->
+        <property name="driverClass" value="${jdbc.driver}" />
+        <!-- url -->
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <!-- 用户名 -->
+        <property name="user" value="${jdbc.uid}" />
+        <!-- 密码 -->
+        <property name="password" value="${jdbc.pwd}" />
+    </bean>
+
+    <!-- 自动扫描接口类，如果发现和某个mapper的namespace一致，那么就知道生成这个接口的实现，然后注入spring容器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <!-- 指定要自动扫描接口的基础包，实现接口 -->
+        <property name="basePackage" value="com.ylzinfo.app.dao"></property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--支持注解驱动的事务管理，指定事务管理器 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="springUtils" class="com.ylzinfo.app.utils.SpringUtils" />
+    <bean id="schedulerFactoryBean"  class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+    <bean id="initQuartzJob" class="com.ylzinfo.app.utils.timer.InitQuartzJob" init-method="init" lazy-init="false" />
+    <bean id="applicationContextUil" class="com.ylzinfo.app.utils.ApplicationContextUtil" />
+
+</beans>

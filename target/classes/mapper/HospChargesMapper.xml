@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.HospChargesDao">
+
+    <resultMap type="HospCharges" id="ChargesColumnMap">
+        <id property="senderMessageID" column="AAZ496"/>
+        <result property="hospADCode" column="AAB299"/>
+        <result property="insADCode" column="AAB301"/>
+        <result property="designatedHosp" column="AKB020"/>
+        <result property="AD" column="AKC190"/>
+        <result property="serialNumber" column="AAZ216"/>
+        <result property="billNumber" column="AAE072"/>
+        <result property="cutOffTime" column="AKC194"/>
+        <result property="sex" column="AAC004"/>
+        <result property="DOB" column="AAC006"/>
+        <result property="CoID" column="AAB001"/>
+        <result property="CoName" column="AAB004"/>
+        <result property="typeOfCo" column="AAB019"/>
+        <result property="EconType" column="AAB020"/>
+        <result property="affiliation" column="AAB021"/>
+        <result property="typeOfInsuredPers" column="AKC009"/>
+        <result property="typeOfInsurance" column="AAE140"/>
+        <result property="statusofPersTreatment" column="AAC210"/>
+        <result property="lowInsuranceSign" column="AAC158"/>
+        <result property="hospGrade" column="AKA101"/>
+        <result property="medicaidOfPFSign" column="AKC026"/>
+        <result property="totalCost" column="AKC264"/>
+        <result property="scopeCost" column="AKE171"/>
+        <result property="scopeCost_ClassA" column="AKC018"/>
+        <result property="selfCost_ClassB_total" column="AKC228"/>
+        <result property="selfCost_ClassB_medicine" column="AKC232"/>
+        <result property="selfCost_ClassB_treat" column="AKC233"/>
+        <result property="selfCost_ClassB_material" column="AKC234"/>
+        <result property="selfCost_ClassB_other" column="AKC235"/>
+        <result property="selfCost" column="AKC253"/>
+        <result property="ultraLimitedPrice" column="AKC268"/>
+        <result property="ultraLimitedPrice_bed" column="AKC236"/>
+        <result property="startPayStandard" column="AKA151"/>
+        <result property="orgTotalCost" column="AKE149"/>
+        <result property="medicalInsuranceCost" column="AKE039"/>
+        <result property="medicaidOfPFCost" column="AKE035"/>
+        <result property="SuppleMedicalInsurance" column="AKE026"/>
+        <result property="MedicalInsurance_si" column="AAE045"/>
+        <result property="MedicalInsurance_disab" column="AKE032"/>
+        <result property="civilAssistanceFund" column="AKE181"/>
+        <result property="otherFundCost" column="AKE173"/>
+        <result property="persCashPayment" column="AKB067"/>
+        <result property="persAccountPayment" column="AKE038"/>
+        <result property="persAccountBalance" column="AAE240"/>
+        <result property="SSID" column="AAC002"/>
+        <result property="name" column="AAC003"/>
+        <result property="fullPaymentSign" column="AKE105"/>
+        <result property="message1" column="AKC070"/>
+        <result property="message2" column="AKC071"/>
+        <result property="message3" column="AKC072"/>
+        <result property="writeOffSign" column="BAE009"/>
+        <result property="writeOffBillNum" column="BAE010"/>
+        <result property="writeOffPers" column="AAE011"/>
+        <result property="midSettlementSign" column="AKE170"/>
+        <result property="useAccountSign" column="AKE122"/>
+        <result property="TAC" column="AAE554"/>
+        <result property="medicalCategory" column="AKA130"/>
+        <result property="recipientMessageID" column="AAZ498"/>
+        <result property="presManageNum" column="AAC999"/>
+        <result property="cardNum" column="AAZ500"/>
+    </resultMap>
+
+    <select id="getHospChargesByCondition" parameterType="ChargesQueryHelper" resultMap="ChargesColumnMap">
+        select count(*) from mobilefrends where AKC194 >= trunc(sysdate-1) and AKC194 &lt; trunc(sysdate)
+        <if test="hospADCode != null and hospADCode!=''">
+            and AAB299 = #{hospADCode}
+        </if>
+        <if test="insADCode != null and insADCode!=''">
+            and AAB299 = #{insADCode}
+        </if>
+    </select>
+
+
+</mapper>

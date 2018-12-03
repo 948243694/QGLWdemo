@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.STimetaskDao">
+    <resultMap type="com.ylzinfo.app.model.STimetask" id="STimetaskMap">
+        <id column="MSGNO" property="MSGNO" javaType="java.lang.String"/>
+        <result column="name" property="name" javaType="java.lang.String"/>
+        <result column="group_name" property="groupName" javaType="java.lang.String"/>
+        <result column="start_time" property="startTime" javaType="java.lang.String"/>
+        <result column="end_time" property="endTime" javaType="java.lang.String"/>
+        <result column="cron" property="cron" javaType="java.lang.String"/>
+        <result column="job_status" property="jobStatus" javaType="java.lang.String"/>
+        <result column="plan_status" property="planStatus" javaType="java.lang.String"/>
+        <result column="is_concurrent" property="isConcurrent" javaType="java.lang.String"/>
+        <result column="methodName" property="methodName" javaType="java.lang.String"/>
+        <result column="bean_name" property="beanName" javaType="java.lang.String"/>
+        <result column="description" property="description" javaType="java.lang.String"/>
+    </resultMap>
+
+
+    <insert id="addTimeTaskTA" parameterType="com.ylzinfo.app.model.STimetask">
+        insert into qglw_job_timer
+        (MSGNO,name,group_name,start_time,end_time,cron,job_status,plan_status,
+        is_concurrent,method_name,bean_name,description)
+        values
+        (#{task.MSGNO,jdbcType=VARCHAR},#{task.name,jdbcType=VARCHAR},#{task.groupName,jdbcType=VARCHAR},
+        #{task.startTime,jdbcType=VARCHAR},#{task.endTime,jdbcType=VARCHAR},#{task.cron,jdbcType=VARCHAR},
+        #{task.jobStatus,jdbcType=VARCHAR},#{task.planStatus,jdbcType=VARCHAR},#{task.isConcurrent,jdbcType=VARCHAR},
+        #{task.methodName,jdbcType=VARCHAR},#{task.beanName,jdbcType=VARCHAR},#{task.description,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="getTimeTaskListTA" resultMap="STimetaskMap">
+        select MSGNO,name,group_name,start_time,end_time,cron,job_status,plan_status,
+        is_concurrent,method_name,bean_name,description
+        from qglw_job_timer
+    </select>
+
+    <select id="getExecutableTaskTA" resultMap="STimetaskMap">
+         select MSGNO,name,group_name,start_time,end_time,cron,job_status,plan_status,
+        is_concurrent,method_name,bean_name,description
+        from qglw_job_timer
+        where job_status = '1'
+    </select>
+
+    <delete id="deleteTaskByNameTA" parameterType="java.lang.String">
+        delete from qglw_job_timer
+        where name = #{jobName} and group_name =#{groupName}
+    </delete>
+    
+    <update id="updateByNameTA" parameterType="com.ylzinfo.app.model.STimetask">
+        update qglw_job_timer
+        set group_name =#{task.groupName,jdbcType=VARCHAR},start_time =#{task.startTime,jdbcType=VARCHAR},
+        end_time =#{task.endTime,jdbcType=VARCHAR},cron =#{task.cron,jdbcType=VARCHAR},
+        job_status =#{task.jobStatus,jdbcType=VARCHAR},plan_status =#{task.planStatus,jdbcType=VARCHAR},
+        is_concurrent =#{task.isConcurrent,jdbcType=VARCHAR},method_name =#{task.methodName,jdbcType=VARCHAR},
+        bean_name =#{task.beanName,jdbcType=VARCHAR},description =#{task.description,jdbcType=VARCHAR}
+        where name = #{task.name,jdbcType=VARCHAR} and group_name =#{task.groupName,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

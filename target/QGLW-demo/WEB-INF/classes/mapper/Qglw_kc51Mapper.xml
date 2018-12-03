@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.Qglw_kc51Dao">
+
+    <insert id="batchAddSOAInfoTA" parameterType="java.util.List">
+        insert into qglw_kc51
+        (AAB299,AAB301,AKC264,AKB067,AKE149,AKC194,AAZ497,AAZ498,AAA113,AKC190,AAZ216,AAE314,AAA204)
+        values
+        <foreach collection="list" item="info" separator=",">
+            (#{info.AAB299},#{info.AAB301},#{info.AKC264},#{info.AKB067},#{info.AKE149},#{info.AKC194},#{info.AAZ497},
+            #{info.AAZ498},#{info.AAA113},#{info.AKC190},#{info.AAZ216},#{info.AAE314},#{info.AAA204})
+        </foreach>
+    </insert>
+
+</mapper>

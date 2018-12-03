@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.Qglw_kc26_zyDao">
+
+    <select id="getHospChargesTA" resultType="Qglw_kc26_zyDTO">
+        select
+        AAB299,AAB301,AKC264,AKE149,AKC194,AAA113,AKC190,AAZ216,AAZ497,AAZ498,AKB067
+        from
+        vw_QGLW_KC26
+    </select>
+
+    <select id="getOmitHospChargesTA" resultType="Qglw_kc26_zyDTO">
+
+    </select>
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylzinfo.app.dao.STimetaskLogDao">
+
+    <insert id="insertTimeTaskLogTA" parameterType="STimetaskLog">
+    insert into qglw_job_tlog
+    (log_id,create_date,MSGNO,reason,state,message)
+    values
+    (#{logID},#{createDate},#{MSGNO},#{reason},#{state},#{message})
+    </insert>
+
+    <select id="getAllLoglListTA" resultType="STimetaskLog">
+        select log_id,create_date,MSGNO,reason,state,message
+        from qglw_job_tlog
+    </select>
+
+</mapper>
